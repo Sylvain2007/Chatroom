@@ -1,4 +1,4 @@
-<!--Base.html re présente le gabarit de base des templates html -->
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="fr">
@@ -8,20 +8,15 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 </head>
-<body>
+<body >
     <header>
         <img src="{% static 'image/symbole.png' %}" alt="Symbole S" title="Sylvain" />
         <p>SYLVAIN'S CHATROOM</p>
         <nav>
-            <a href="{% url 'public_chat' %}">MESSAGERIE</a>
-            <a href="">CHAT ANONYME</a>
-            <a href="">ECRIRE</a>
+            <a href="{% url 'login' %}" class="connected">SE CONNECTER</a>
         </nav>
     </header>
-    {% block content %}{% endblock content %}
-    {% if user.is_authenticated %}
-    <a href="{% url 'logout' %}">Se déconnecter</a>
-    {% endif %}
+    
     <footer>
         
     </footer>

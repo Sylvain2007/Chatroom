@@ -16,7 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from authentification import views as VI
+from Chat import views as V
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', VI.login_page, name='login'),
+    path('', VI.home, name='home'),
+    path('messagerie_publique', V.chat_echange, name="public_chat"),
+    path('signup/', VI.signup_page, name = 'signup'),
+    path('logout/', VI.logout_user, name = 'logout'),
+
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
