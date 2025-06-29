@@ -1,12 +1,77 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Inscription</h2>
-    {% if form.errors %}
-        {{ form.errors }}
-    {% endif %}
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit" >S’inscrire</button>
-    </form>
+    <div class="formulaire">
+        <h2>Inscription</h2>
+        <form method="post" class="signup-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur*</label>
+                <input type="text" id="username" name="username" 
+                       value="{{ form.username.value|default:'' }}" required>
+                {% if form.username.errors %}
+                    <div class="error-message">
+                        {% for error in form.username.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <small class="hint">
+                <i class="fas fa-info-circle"></i> 150 caractères max. Lettres, chiffres, @ . + - _
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email*</label>
+                <input type="email" id="email" name="email"
+                       value="{{ form.email.value|default:'' }}" required>
+                {% if form.email.errors %}
+                    <div class="error-message">{{ form.email.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="first_name">Prénom*</label>
+                <input type="text" id="first_name" name="first_name"
+                       value="{{ form.first_name.value|default:'' }}" required>
+            </div>
+
+            
+            <div class="form-group">
+                <label for="last_name">Nom*</label>
+                <input type="text" id="last_name" name="last_name"
+                       value="{{ form.last_name.value|default:'' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password1">Mot de passe*</label>
+                <input type="password" id="password1" name="password1" required>
+                {% if form.password1.errors %}
+                    <div class="error-message">
+                        {% for error in form.password1.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="password-rules">
+                <span class="rule"><i class="fas fa-check-circle"></i> Minimum 6 caractères</span>
+                <span class="rule"><i class="fas fa-check-circle"></i> Au moins une lettre</span>
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                <label for="password2">Confirmation du mot de passe*</label>
+                <input type="password" id="password2" name="password2" required>
+                {% if form.password2.errors %}
+                    <div class="error-message">{{ form.password2.errors }}</div>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="submit-btn">S'inscrire</button>
+            
+            <p class="login-link">
+            Déjà inscrit ? <a href="{% url 'login' %}">Connectez-vous</a>
+            </p>
+        </form>
+    </div>
 {% endblock content %}

@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <title>{% block title %}Chatroom{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 </head>
 <body>
@@ -13,9 +15,16 @@
         <img src="{% static 'image/symbole.png' %}" alt="Symbole S" title="Sylvain" />
         <p>SYLVAIN'S CHATROOM</p>
         <nav>
+            {% if user.is_authenticated %}
             <a href="{% url 'public_chat' %}">MESSAGERIE</a>
             <a href="">CHAT ANONYME</a>
             <a href="">ECRIRE</a>
+            {% if user.is_superuser %}
+            <a href="{% url 'admin:index' %}">ADMIN</a>
+            {% endif %}
+            {% else %}
+            <a href="{% url 'login' %}">SE CONNECTER</a>
+            {% endif %}
         </nav>
     </header>
     {% block content %}{% endblock content %}

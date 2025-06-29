@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect 
-from authentification.forms import LoginForm, SignupForm
 from django.contrib.auth import login, authenticate, logout
-from django.conf import settings
+from authentification.forms import LoginForm, SignupForm
 
 def login_page(request):
     form = LoginForm()
@@ -39,7 +38,7 @@ def signup_page(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect(settings.LOGIN_REDIRECT_URL)
+            return redirect('public_chat')
         
     return render(request, 'authentification/signup_page.html',
                   context={'form': form})

@@ -1,24 +1,5 @@
+{% extends 'base.html' %}
 
-{% load static %}
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Chatroom{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% block content %}
 
-</head>
-<body >
-    <header>
-        <img src="{% static 'image/symbole.png' %}" alt="Symbole S" title="Sylvain" />
-        <p>SYLVAIN'S CHATROOM</p>
-        <nav>
-            <a href="{% url 'login' %}" class="connected">SE CONNECTER</a>
-        </nav>
-    </header>
-    
-    <footer>
-        
-    </footer>
-</body>
-</html>
+{% endblock content %}
