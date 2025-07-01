@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="home-container">
@@ -49,14 +50,12 @@
 <script>
     window.onload = () => {
         const images = [
-            "https://images.unsplash.com/photo-1529070538774-1843cb3265df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1650&q=80",
-            "https://images.unsplash.com/photo-1602407294553-c1fe9fe6b1b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1650&q=80",
-            "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1650&q=80",
-            "https://images.unsplash.com/photo-1534854638093-badaaa14543d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1650&q=80",
-            "https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1650&q=80"
+            "{% static 'images/bg1.png' %}",
+            "{% static 'images/bg2.png' %}",
+            "{% static 'images/bg3.jpg' %}"
         ];
 
-        // Précharger les images
+        // Précharger les images (pour éviter le clignotement)
         images.forEach(src => {
             const img = new Image();
             img.src = src;
@@ -69,7 +68,7 @@
         setInterval(() => {
             currentIndex = (currentIndex + 1) % images.length;
             container.style.backgroundImage = `url('${images[currentIndex]}')`;
-        }, 5000); // toutes les 5 secondes
+        }, 5000); // change toutes les 5 secondes
 
         const texts = ["The Chatroom", "La meilleure communauté", "Rejoins-nous vite !", "Partage tes conneries"];
         let textIndex = 0;
@@ -77,7 +76,7 @@
         setInterval(() => {
             document.getElementById("dynamic-text").textContent = texts[textIndex];
             textIndex = (textIndex + 1) % texts.length;
-        }, 3000); // toutes les 3 secondes
+        }, 3000); // change toutes les 3 secondes
     };
 </script>
 {% endblock extra_js %}
